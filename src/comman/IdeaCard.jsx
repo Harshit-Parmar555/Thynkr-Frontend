@@ -17,6 +17,13 @@ const IdeaCard = ({
     navigate(`/idea/${id}`);
   };
 
+  const handleUserClick = (e) => {
+    e.stopPropagation();
+    if (user?.id) {
+      navigate(`/user/${user.id}`);
+    }
+  };
+
   return (
     <div className="relative max-w-sm rounded-2xl border border-zinc-800 p-4 shadow-md bg-zinc-950 overflow-hidden">
       {/* Decorative gradients */}
@@ -27,7 +34,10 @@ const IdeaCard = ({
       <div className="relative z-10">
         {/* User profile, name, and date */}
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
+          <div
+            className="flex items-center gap-3 cursor-pointer rounded-lg p-1 transition"
+            onClick={handleUserClick}
+          >
             <img
               src={user?.avatar}
               alt={`${user?.name}'s avatar`}

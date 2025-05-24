@@ -9,6 +9,7 @@ const ideas = [
     user: {
       name: "Ramkrishna Swarnkar",
       avatar: "https://avatars.githubusercontent.com/u/000000?v=4",
+      id :"000000",
     },
     date: "December 4, 2024",
     title: "Scale AI",
@@ -23,6 +24,7 @@ const ideas = [
     user: {
       name: "Ananya Sharma",
       avatar: "https://avatars.githubusercontent.com/u/000001?v=4",
+      id :"000001",
     },
     date: "January 15, 2025",
     title: "GreenCharge",
@@ -37,6 +39,7 @@ const ideas = [
     user: {
       name: "Sarthak Mehta",
       avatar: "https://avatars.githubusercontent.com/u/000002?v=4",
+      id :"000002",
     },
     date: "February 2, 2025",
     title: "SkillBridge",
@@ -51,6 +54,7 @@ const ideas = [
     user: {
       name: "Riya Verma",
       avatar: "https://avatars.githubusercontent.com/u/000003?v=4",
+      id :"000003",
     },
     date: "March 12, 2025",
     title: "MediConnect",
@@ -65,6 +69,7 @@ const ideas = [
     user: {
       name: "Aman Khurana",
       avatar: "https://avatars.githubusercontent.com/u/000004?v=4",
+      id :"000004",
     },
     date: "April 8, 2025",
     title: "AgroTrack",
