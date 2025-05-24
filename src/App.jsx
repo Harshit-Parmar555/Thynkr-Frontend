@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home";
 import Idea from "./pages/Idea/Idea";
 import Profile from "./pages/Profile/Profile";
 import Post from "./pages/Post/Post";
+import User from "./pages/User/User";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/idea/:id" element={<Idea />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/user/:id" element={<User />} />
         </Route>
       </Routes>
     </BrowserRouter>
