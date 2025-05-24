@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 export const useIdeaStore = create((set) => ({
   ideas: [],
   fetchingIdeas: false,
+  viewIdea: null,
+  fetchingIdea: false,
 
   fetchIdeas: async () => {
     try {
@@ -18,5 +20,15 @@ export const useIdeaStore = create((set) => ({
     }
   },
 
-  
+  getIdea: async (id) => {
+    try {
+      set({ fetchingIdea: true });
+      const response = await axiosInstance.get(`/idea/fetch-idea-by-id/${id}`);
+      set({ viewIdea: response.data.idea });
+    } catch (error) {
+      toast.error("Failed to fetch idea");
+    } finally {
+      set({ fetchingIdea: false });
+    }
+  },
 }));
