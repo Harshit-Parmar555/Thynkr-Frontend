@@ -1,20 +1,13 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "@/utils/dateFormat";
 
-const IdeaCard = ({
-  user,
-  date,
-  title,
-  description,
-  coverImage,
-  category,
-  id,
-}) => {
+const IdeaCard = ({ idea }) => {
   const navigate = useNavigate();
 
   const handleDetailsClick = () => {
-    navigate(`/idea/${id}`);
+    navigate(`/idea/${idea._id}`);
   };
 
   const handleUserClick = (e) => {
@@ -39,36 +32,38 @@ const IdeaCard = ({
             onClick={handleUserClick}
           >
             <img
-              src={user?.avatar}
-              alt={`${user?.name}'s avatar`}
+              src={idea?.user?.profilePicture}
+              alt={`${idea?.user?.username}'s avatar`}
               className="w-8 h-8 rounded-full"
             />
             <span className="text-sm font-medium text-white font-[Poppins]">
-              {user?.name}
+              {idea?.user?.username}
             </span>
           </div>
-          <span className="text-xs text-gray-400 font-[Inter]">{date}</span>
+          <span className="text-xs text-gray-400 font-[Inter]">
+            {formatDate(idea?.createdAt)}
+          </span>
         </div>
 
         {/* Idea name and description */}
         <h2 className="text-lg font-bold text-white mb-1 font-[Poppins]">
-          {title}
+          {idea?.title}
         </h2>
         <p className="text-sm text-gray-400 mb-4 line-clamp-2 font-[Inter]">
-          {description}
+          {idea?.description}
         </p>
 
         {/* Cover image */}
         <img
-          src={coverImage}
-          alt={`${title} Cover`}
+          src={idea?.coverImage}
+          alt={`${idea?.title} Cover`}
           className="w-full mb-4 rounded-md h-40 object-cover"
         />
 
         {/* Category badge and details button */}
         <div className="flex justify-between items-center">
           <span className="bg-zinc-800 text-blue-400 px-3 py-1 rounded-full text-xs font-semibold font-[Inter]">
-            {category}
+            {idea?.category}
           </span>
           <Button
             className="rounded-full px-4 py-1 text-sm font-[Lato] cursor-pointer"
