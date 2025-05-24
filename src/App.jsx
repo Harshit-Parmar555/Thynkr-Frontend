@@ -5,6 +5,7 @@ import Layout from "./Layout/Layout";
 
 // pages import
 import Home from "./pages/Home/Home";
+import Idea from "./pages/Idea/Idea";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/idea/:id" element={<Idea />} />
         </Route>
       </Routes>
     </BrowserRouter>
