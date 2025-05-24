@@ -1,12 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Idea = () => {
+  const navigate = useNavigate();
+
   const idea = {
     id: 1,
     user: {
       name: "Harshit Parmar",
-      avatar: "https://avatars.githubusercontent.com/u/000000?v=4",
       email: "parmarharshit441@gmai.com",
+      avatar: "https://avatars.githubusercontent.com/u/000000?v=4",
+      // Add a userId or username for navigation
+      userId: "000000",
     },
     date: "December 4, 2024",
     title: "Scale AI",
@@ -17,6 +22,11 @@ const Idea = () => {
     category: "Technology",
     pitch:
       "A platform that accelerates AI development by providing high-quality training data, enabling faster and more efficient deployment of AI solutions.",
+  };
+
+  const handleUserClick = () => {
+    // Navigate to the user's profile page (adjust route as needed)
+    navigate(`/user/${idea.user.userId}`);
   };
 
   return (
@@ -32,7 +42,10 @@ const Idea = () => {
 
       {/* User info and date */}
       <div className="w-full sm:w-[90%] lg:w-[60%] flex justify-between items-center mt-8 px-2">
-        <div className="flex items-center gap-3">
+        <div
+          className="flex items-center gap-3 cursor-pointer rounded-lg p-2 transition"
+          onClick={handleUserClick}
+        >
           <img
             src={idea.user?.avatar}
             alt={`${idea.user?.name}'s avatar`}
