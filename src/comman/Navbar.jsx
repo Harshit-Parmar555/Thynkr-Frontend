@@ -1,20 +1,22 @@
 import React from "react";
-import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+
+// components imports
 import { Button } from "@/components/ui/button";
 
+// asset imports
+import logo from "../assets/logo.png";
 import { FaGoogle } from "react-icons/fa";
 
+// auth store import
+import { useAuthStore } from "@/store/useAuthStore";
+
 const Navbar = () => {
-  const user = {
-    username: "John Doe",
-    avatar:
-      "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww",
-  };
+  const { user, signup, signingIn } = useAuthStore();
 
   const handleSignup = () => {
     try {
-      console.log("clicked");
+      signup();
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +35,7 @@ const Navbar = () => {
         <Link to="/profile">
           <div className="flex items-center gap-2">
             <img
-              src={user?.avatar}
+              src={user?.profilePicture}
               alt=""
               className="h-10 w-10 rounded-full object-cover"
             />
@@ -52,7 +54,7 @@ const Navbar = () => {
           className="flex items-center rounded-sm cursor-pointer bg-white text-black hover:bg-white/80 px-6 py-4"
         >
           <FaGoogle className="text-black" />
-          Sign Up
+          {signingIn ? "Wait..." : "Sign Up"}
         </Button>
       )}
     </div>
