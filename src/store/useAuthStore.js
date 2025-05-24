@@ -18,6 +18,7 @@ export const useAuthStore = create((set) => ({
       const idToken = await user.getIdToken();
       // signup the user in your backend
       const response = await axiosInstance.post("auth/signup", { idToken });
+      toast.success(response.data.message || "Signup successful");
       set({ user: response.data.user, isAuthenticated: true });
     } catch (error) {
       toast.error(error.response?.data?.message || "Signup failed");
@@ -30,6 +31,7 @@ export const useAuthStore = create((set) => ({
     try {
       set({ loggingOut: true });
       const response = await axiosInstance.get("/auth/logout");
+      toast.success(response.data.message || "Logged out successfully");
       set({ user: null, isAuthenticated: false });
     } catch (error) {
       toast.error(error.response?.data?.message || "Logout failed");
@@ -46,9 +48,7 @@ export const useAuthStore = create((set) => ({
         isAuthenticated: true,
       });
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Authentication check failed"
-      );
+      console.error("Authentication check failed:", error);
     } finally {
       set({ checkingAuth: false });
     }
