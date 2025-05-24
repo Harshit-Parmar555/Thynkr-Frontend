@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import IdeaCard from "@/comman/IdeaCard";
+import { useNavigate } from "react-router-dom";
 
 // Mock user data
 const user = {
@@ -37,6 +38,11 @@ const userIdeas = [
 ];
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    alert("Logout functionality not implemented yet.");
+  };
   return (
     <div className="w-full pt-32 flex flex-col items-center">
       {/* Enhanced User Info Section */}
@@ -80,10 +86,16 @@ const Profile = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col md:flex-row gap-4 z-10">
-          <Button className="bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-md transition-all duration-200">
+          <Button
+            onClick={() => navigate("/post")}
+            className="bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-md transition-all duration-200"
+          >
             + Add New Idea
           </Button>
-          <Button className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white px-8 py-3 rounded-xl font-bold shadow-md transition-all duration-200">
+          <Button
+            onClick={handleLogout}
+            className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white px-8 py-3 rounded-xl font-bold shadow-md transition-all duration-200"
+          >
             Logout
           </Button>
         </div>
