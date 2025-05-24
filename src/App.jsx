@@ -14,7 +14,21 @@ import User from "./pages/User/User";
 // route guard import
 import { ProtectedRoute } from "./route-guards/Guards";
 
+// auth store import
+import { useAuthStore } from "./store/useAuthStore";
+
+import Loader from "./comman/Loader";
+
 const App = () => {
+  const { checkAuth, checkingAuth } = useAuthStore();
+  React.useEffect(() => {
+    checkAuth();
+  }, []);
+
+  if (checkingAuth) {
+    return <Loader />;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
