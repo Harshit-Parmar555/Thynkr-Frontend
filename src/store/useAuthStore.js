@@ -3,7 +3,7 @@ import { auth, provider, signInWithPopup } from "@/utils/firebaseConfig";
 import { axiosInstance } from "@/utils/axios";
 import toast from "react-hot-toast";
 
-export default useAuthStore = create((set) => ({
+export const useAuthStore = create((set) => ({
   user: null,
   isAuthenticated: false,
   signingIn: false,
