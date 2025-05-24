@@ -43,14 +43,20 @@ const IdeaCard = ({
               alt={`${user?.name}'s avatar`}
               className="w-8 h-8 rounded-full"
             />
-            <span className="text-sm font-medium text-white">{user?.name}</span>
+            <span className="text-sm font-medium text-white font-[Poppins]">
+              {user?.name}
+            </span>
           </div>
-          <span className="text-xs text-gray-400">{date}</span>
+          <span className="text-xs text-gray-400 font-[Inter]">{date}</span>
         </div>
 
         {/* Idea name and description */}
-        <h2 className="text-lg font-bold text-white mb-1">{title}</h2>
-        <p className="text-sm text-gray-400 mb-4 line-clamp-2">{description}</p>
+        <h2 className="text-lg font-bold text-white mb-1 font-[Poppins]">
+          {title}
+        </h2>
+        <p className="text-sm text-gray-400 mb-4 line-clamp-2 font-[Inter]">
+          {description}
+        </p>
 
         {/* Cover image */}
         <img
@@ -61,11 +67,11 @@ const IdeaCard = ({
 
         {/* Category badge and details button */}
         <div className="flex justify-between items-center">
-          <span className="bg-zinc-800 text-blue-400 px-3 py-1 rounded-full text-xs font-semibold">
+          <span className="bg-zinc-800 text-blue-400 px-3 py-1 rounded-full text-xs font-semibold font-[Inter]">
             {category}
           </span>
           <Button
-            className="rounded-full px-4 py-1 text-sm"
+            className="rounded-full px-4 py-1 text-sm font-[Lato] cursor-pointer"
             onClick={handleDetailsClick}
           >
             Details

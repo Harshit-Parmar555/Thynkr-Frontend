@@ -10,7 +10,6 @@ const Idea = () => {
       name: "Harshit Parmar",
       email: "parmarharshit441@gmai.com",
       avatar: "https://avatars.githubusercontent.com/u/000000?v=4",
-      // Add a userId or username for navigation
       userId: "000000",
     },
     date: "December 4, 2024",
@@ -25,7 +24,6 @@ const Idea = () => {
   };
 
   const handleUserClick = () => {
-    // Navigate to the user's profile page (adjust route as needed)
     navigate(`/user/${idea.user.userId}`);
   };
 
@@ -43,7 +41,7 @@ const Idea = () => {
       {/* User info and date */}
       <div className="w-full sm:w-[90%] lg:w-[60%] flex justify-between items-center mt-8 px-2">
         <div
-          className="flex items-center gap-3 cursor-pointer rounded-lg p-2 transition"
+          className="flex items-center gap-3 cursor-pointer rounded-lg p-2 transition hover:bg-zinc-800/40"
           onClick={handleUserClick}
         >
           <img
@@ -52,23 +50,29 @@ const Idea = () => {
             className="w-10 h-10 rounded-full"
           />
           <div>
-            <div className="text-base font-semibold text-white">
+            <div className="text-base font-semibold text-white font-[Poppins]">
               {idea.user?.name}
             </div>
-            <div className="text-sm text-zinc-400">
+            <div className="text-sm text-zinc-400 font-[Inter]">
               {idea.user?.email || "No email"}
             </div>
           </div>
         </div>
-        <div className="text-sm text-zinc-400">{idea.date}</div>
+        <div className="text-sm text-zinc-400 font-[Inter]">{idea.date}</div>
       </div>
 
       {/* Description and Pitch */}
       <div className="w-full sm:w-[90%] lg:w-[60%] mt-8 px-2 pb-6">
-        <h2 className="text-xl font-bold text-white mb-2">Description</h2>
-        <p className="text-base text-zinc-300 mb-6">{idea.description}</p>
-        <h2 className="text-xl font-bold text-white mb-2">Pitch</h2>
-        <p className="text-base text-zinc-300">
+        <h2 className="text-xl font-bold text-white mb-2 font-[Poppins]">
+          Description
+        </h2>
+        <p className="text-base text-zinc-300 mb-6 font-[Inter]">
+          {idea.description}
+        </p>
+        <h2 className="text-xl font-bold text-white mb-2 font-[Poppins]">
+          Pitch
+        </h2>
+        <p className="text-base text-zinc-300 font-[Inter]">
           {idea.pitch || "No pitch provided."}
         </p>
       </div>

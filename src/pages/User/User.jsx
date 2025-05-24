@@ -55,23 +55,10 @@ const User = () => {
             />
           </div>
           <div>
-            <div className="text-3xl font-extrabold text-white tracking-tight">
+            <div className="text-3xl font-extrabold text-white tracking-tight font-[Poppins]">
               {user.name}
             </div>
-            <div className="text-base text-zinc-400 mt-1 flex items-center gap-2">
-              <svg
-                className="w-5 h-5 text-blue-400"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16 12a4 4 0 01-8 0m8 0a4 4 0 00-8 0m8 0V8a4 4 0 10-8 0v4m8 0v4a4 4 0 01-8 0v-4"
-                ></path>
-              </svg>
+            <div className="text-sm text-zinc-400 mt-1 flex items-center gap-2 font-[Inter]">
               {user.email}
             </div>
           </div>
@@ -79,7 +66,7 @@ const User = () => {
       </div>
 
       {/* User's Ideas Section */}
-      <div className="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
+      <div className="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 pb-8">
         {userIdeas.length > 0 ? (
           userIdeas.map((idea) => <IdeaCard key={idea.id} {...idea} />)
         ) : (

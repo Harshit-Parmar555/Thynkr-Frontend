@@ -9,7 +9,7 @@ const ideas = [
     user: {
       name: "Ramkrishna Swarnkar",
       avatar: "https://avatars.githubusercontent.com/u/000000?v=4",
-      id :"000000",
+      id: "000000",
     },
     date: "December 4, 2024",
     title: "Scale AI",
@@ -24,7 +24,7 @@ const ideas = [
     user: {
       name: "Ananya Sharma",
       avatar: "https://avatars.githubusercontent.com/u/000001?v=4",
-      id :"000001",
+      id: "000001",
     },
     date: "January 15, 2025",
     title: "GreenCharge",
@@ -39,7 +39,7 @@ const ideas = [
     user: {
       name: "Sarthak Mehta",
       avatar: "https://avatars.githubusercontent.com/u/000002?v=4",
-      id :"000002",
+      id: "000002",
     },
     date: "February 2, 2025",
     title: "SkillBridge",
@@ -54,7 +54,7 @@ const ideas = [
     user: {
       name: "Riya Verma",
       avatar: "https://avatars.githubusercontent.com/u/000003?v=4",
-      id :"000003",
+      id: "000003",
     },
     date: "March 12, 2025",
     title: "MediConnect",
@@ -69,7 +69,7 @@ const ideas = [
     user: {
       name: "Aman Khurana",
       avatar: "https://avatars.githubusercontent.com/u/000004?v=4",
-      id :"000004",
+      id: "000004",
     },
     date: "April 8, 2025",
     title: "AgroTrack",
@@ -96,14 +96,14 @@ const Home = () => {
     <div className="w-full pt-32 flex flex-col items-center">
       <div className="max-w-4xl w-full px-4">
         <Input
-          className="w-full h-14 border-zinc-800 text-white"
+          className="w-full h-14 border-zinc-800 text-white font-[Inter]"
           placeholder="Search Ideas . . ."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           aria-label="Search Ideas"
         />
       </div>
-      <div className="max-w-7xl w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
+      <div className="max-w-7xl w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 pb-8">
         {filteredIdeas.length > 0 ? (
           filteredIdeas.map((idea) => <IdeaCard key={idea.id} {...idea} />)
         ) : (

@@ -62,23 +62,10 @@ const Profile = () => {
             <span className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-zinc-950 rounded-full"></span>
           </div>
           <div>
-            <div className="text-3xl font-extrabold text-white tracking-tight">
+            <div className="text-3xl font-extrabold text-white tracking-tight font-[Poppins]">
               {user.name}
             </div>
-            <div className="text-base text-zinc-400 mt-1 flex items-center gap-2">
-              <svg
-                className="w-5 h-5 text-blue-400"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16 12a4 4 0 01-8 0m8 0a4 4 0 00-8 0m8 0V8a4 4 0 10-8 0v4m8 0v4a4 4 0 01-8 0v-4"
-                ></path>
-              </svg>
+            <div className="text-zinc-400 mt-1 flex items-center gap-2 font-[Inter] text-sm">
               {user.email}
             </div>
           </div>
@@ -88,13 +75,13 @@ const Profile = () => {
         <div className="flex flex-col md:flex-row gap-4 z-10">
           <Button
             onClick={() => navigate("/post")}
-            className="bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-md transition-all duration-200"
+            className="bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white px-8 py-3 rounded-xl font-semibold shadow-md transition-all duration-200 font-[Lato]"
           >
             + Add New Idea
           </Button>
           <Button
             onClick={handleLogout}
-            className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white px-8 py-3 rounded-xl font-bold shadow-md transition-all duration-200"
+            className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white px-8 py-3 rounded-xl font-semibold shadow-md transition-all duration-200 font-[Lato]"
           >
             Logout
           </Button>
