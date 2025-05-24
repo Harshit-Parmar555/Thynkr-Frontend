@@ -3,45 +3,19 @@ import { Button } from "@/components/ui/button";
 import IdeaCard from "@/comman/IdeaCard";
 import { useNavigate } from "react-router-dom";
 
-// Mock user data
-const user = {
-  name: "Harshit Parmar",
-  email: "parmarharshit441@gmail.com",
-  avatar: "https://avatars.githubusercontent.com/u/000000?v=4",
-};
-
-// Mock user ideas (replace with API data in production)
-const userIdeas = [
-  {
-    id: 1,
-    user,
-    date: "December 4, 2024",
-    title: "Scale AI",
-    description:
-      "Accelerates the development of AI applications by providing high-quality training data for machine learning models.",
-    coverImage:
-      "https://images.unsplash.com/photo-1726056652582-7c9d202d4018?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
-    category: "Technology",
-  },
-  {
-    id: 2,
-    user,
-    date: "January 15, 2025",
-    title: "GreenCharge",
-    description:
-      "A platform focused on smart grid technology that enables real-time electric vehicle charging optimization.",
-    coverImage:
-      "https://images.unsplash.com/photo-1726066012698-bb7a3abce786?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3MXx8fGVufDB8fHx8fA%3D%3D",
-    category: "Energy",
-  },
-  // ...add more ideas
-];
+// auth store import
+import { useAuthStore } from "@/store/useAuthStore";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { user, logout } = useAuthStore();
 
   const handleLogout = () => {
-    alert("Logout functionality not implemented yet.");
+    try {
+      logout();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
   return (
     <div className="w-full pt-32 flex flex-col items-center">
@@ -55,15 +29,15 @@ const Profile = () => {
         <div className="relative z-10 flex items-center gap-6">
           <div className="relative">
             <img
-              src={user.avatar}
-              alt={`${user.name}'s avatar`}
+              src={user.profilePicture}
+              alt={`${user.username}'s avatar`}
               className="w-28 h-28 rounded-full border-4 border-blue-600 shadow-lg object-cover"
             />
             <span className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-zinc-950 rounded-full"></span>
           </div>
           <div>
             <div className="text-3xl font-extrabold text-white tracking-tight font-[Poppins]">
-              {user.name}
+              {user.username}
             </div>
             <div className="text-zinc-400 mt-1 flex items-center gap-2 font-[Inter] text-sm">
               {user.email}
@@ -90,8 +64,8 @@ const Profile = () => {
 
       {/* User's Ideas Section */}
       <div className="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-        {userIdeas.length > 0 ? (
-          userIdeas.map((idea) => <IdeaCard key={idea.id} {...idea} />)
+        {user.ideas.length > 0 ? (
+          user.ideas.map((idea) => <IdeaCard key={idea.id} {...idea} />)
         ) : (
           <div className="col-span-full text-center text-zinc-400">
             You haven't uploaded any ideas yet.
