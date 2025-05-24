@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const IdeaCard = ({
   user,
@@ -8,7 +9,14 @@ const IdeaCard = ({
   description,
   coverImage,
   category,
+  id, // Make sure to receive id as prop
 }) => {
+  const navigate = useNavigate();
+
+  const handleDetailsClick = () => {
+    navigate(`/idea/${id}`);
+  };
+
   return (
     <div className="max-w-sm rounded-2xl border border-zinc-800 p-4 shadow-md bg-zinc-950">
       {/* User profile, name, and date */}
@@ -40,7 +48,12 @@ const IdeaCard = ({
         <span className="bg-zinc-800 text-blue-400 px-3 py-1 rounded-full text-xs font-semibold">
           {category}
         </span>
-        <Button className="rounded-full px-4 py-1 text-sm">Details</Button>
+        <Button
+          className="rounded-full px-4 py-1 text-sm"
+          onClick={handleDetailsClick}
+        >
+          Details
+        </Button>
       </div>
     </div>
   );
