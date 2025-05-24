@@ -12,8 +12,8 @@ const IdeaCard = ({ idea }) => {
 
   const handleUserClick = (e) => {
     e.stopPropagation();
-    if (user?.id) {
-      navigate(`/user/${user.id}`);
+    if (idea?.user?._id) {
+      navigate(`/user/${idea?.user?._id}`);
     }
   };
 
