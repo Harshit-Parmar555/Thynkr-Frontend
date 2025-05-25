@@ -73,7 +73,7 @@ const Home = () => {
           ))
         ) : ideas.length > 0 ? (
           ideas.map((idea) => (
-            <IdeaCard key={idea.id} idea={idea} loggedInUser={user._id} />
+            <IdeaCard key={idea?.id} idea={idea} loggedInUser={user?._id} />
           ))
         ) : hasSearched ? (
           <div className="col-span-full text-center text-zinc-400">
