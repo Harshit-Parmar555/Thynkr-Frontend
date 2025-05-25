@@ -1,8 +1,8 @@
+// React and UI Components
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
 import {
   Select,
   SelectTrigger,
@@ -11,9 +11,17 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-// idea store import
+// Form
+import { useForm } from "react-hook-form";
+
+// Store
 import { useIdeaStore } from "@/store/useIdeaStore";
 
+/**
+ * Upload (Post) Page
+ * - Allows users to upload a new idea
+ * - Responsive and accessible
+ */
 const Upload = () => {
   const {
     register,
@@ -25,6 +33,7 @@ const Upload = () => {
 
   const { postIdea } = useIdeaStore();
 
+  // Handle form submission
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
@@ -37,6 +46,7 @@ const Upload = () => {
       await postIdea(formData);
       reset();
     } catch (error) {
+      // In production, use a toast or error boundary instead of console.log
       console.error("Error uploading idea:", error);
     }
   };
@@ -68,8 +78,8 @@ const Upload = () => {
               },
             })}
           />
-          {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          {errors.title && (
+            <p className="text-red-500 text-sm">{errors.title.message}</p>
           )}
         </div>
 
@@ -115,7 +125,6 @@ const Upload = () => {
               <SelectItem value="Finance">Finance</SelectItem>
             </SelectContent>
           </Select>
-
           {errors.category && (
             <p className="text-red-500 text-sm">{errors.category.message}</p>
           )}
@@ -139,8 +148,8 @@ const Upload = () => {
             className="h-12 border border-zinc-600 text-white placeholder:text-zinc-600"
             {...register("coverImage", { required: "Cover image is required" })}
           />
-          {errors.coverImg && (
-            <p className="text-red-500 text-sm">{errors.coverImg.message}</p>
+          {errors.coverImage && (
+            <p className="text-red-500 text-sm">{errors.coverImage.message}</p>
           )}
         </div>
 
@@ -169,7 +178,7 @@ const Upload = () => {
           )}
         </div>
 
-        <Button className="w-full h-12 bg-white text-black rounded-md hover:bg-white/80 transition duration-200">
+        <Button className="w-full h-12 bg-blue-600 hover:bg-blue-600/80 text-white rounded-md transition duration-200">
           Upload
         </Button>
       </form>
