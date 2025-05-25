@@ -11,29 +11,19 @@ const Home = () => {
   const query = searchParams.get("q") || "";
   const debouncedSearch = useRef();
 
-  // Fetch ideas on mount and when query changes, with debounce
+  // Always debounce, even on mount
   useEffect(() => {
-    // Fetch immediately on mount (no debounce)
-    if (debouncedSearch.current === undefined) {
-      fetchIdeas(query);
-      debouncedSearch.current = null;
-      return;
-    }
-    // Debounce for subsequent changes
     if (debouncedSearch.current) clearTimeout(debouncedSearch.current);
     debouncedSearch.current = setTimeout(() => {
       fetchIdeas(query);
-    }, 800);
+    }, 500);
     return () => clearTimeout(debouncedSearch.current);
-    // eslint-disable-next-line
   }, [query]);
 
-  // Input handler
   const handleInputChange = (e) => {
     setSearchParams(e.target.value ? { q: e.target.value } : {});
   };
 
-  // Optional: clear search
   const handleClear = () => setSearchParams({});
 
   return (
@@ -62,7 +52,7 @@ const Home = () => {
         </div>
       </div>
       <div className="max-w-7xl w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 pb-8">
-        {fetchingIdeas ? (
+        {fetchingIdeas && ideas.length === 0 ? (
           Array.from({ length: 6 }).map((_, idx) => (
             <IdeaCardSkeleton key={idx} />
           ))
