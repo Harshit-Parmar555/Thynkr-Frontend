@@ -9,10 +9,13 @@ export const useIdeaStore = create((set) => ({
   fetchingIdea: false,
   postingIdea: false,
 
-  fetchIdeas: async () => {
+  fetchIdeas: async (query) => {
     try {
       set({ fetchingIdeas: true });
-      const response = await axiosInstance.get("/idea/fetch-all-ideas");
+      const endPoint = query
+        ? `/idea/fetch-all-ideas?query=${query}`
+        : "/idea/fetch-all-ideas";
+      const response = await axiosInstance.get(endPoint);
       set({ ideas: response.data.ideas });
     } catch (error) {
       toast.error("Failed to fetch ideas");
