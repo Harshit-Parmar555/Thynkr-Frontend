@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useIdeaStore } from "@/store/useIdeaStore";
 import { formatDate } from "@/utils/dateFormat";
+import { IdeaSkeleton } from "@/comman/Skeletons";
 
 const Idea = () => {
   const navigate = useNavigate();
-  const { getIdea, viewIdea } = useIdeaStore();
+  const { getIdea, viewIdea, fetchingIdea } = useIdeaStore();
   const { id } = useParams();
 
   const handleUserClick = () => {
@@ -14,7 +15,12 @@ const Idea = () => {
 
   useEffect(() => {
     getIdea(id);
-  }, []);
+    // eslint-disable-next-line
+  }, [id]);
+
+  if (fetchingIdea || !viewIdea) {
+    return <IdeaSkeleton />;
+  }
 
   return (
     <div className="w-full pt-32 flex flex-col items-center">
