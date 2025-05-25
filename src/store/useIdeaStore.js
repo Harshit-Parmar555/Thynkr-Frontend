@@ -7,6 +7,7 @@ export const useIdeaStore = create((set) => ({
   fetchingIdeas: false,
   viewIdea: null,
   fetchingIdea: false,
+  postingIdea: false,
 
   fetchIdeas: async () => {
     try {
@@ -29,6 +30,22 @@ export const useIdeaStore = create((set) => ({
       toast.error("Failed to fetch idea");
     } finally {
       set({ fetchingIdea: false });
+    }
+  },
+
+  postIdea: async (ideaData) => {
+    try {
+      set({ postingIdea: true });
+      const response = await axiosInstance.post("/idea/post-idea", ideaData);
+      set((state) => ({
+        ideas: [...state.ideas, response.data.idea],
+      }));
+
+      toast.success("Idea posted successfully");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to post idea");
+    } finally {
+      set({ postingIdea: false });
     }
   },
 }));
