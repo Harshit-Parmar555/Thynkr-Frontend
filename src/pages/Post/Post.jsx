@@ -11,6 +11,9 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
+// idea store import
+import { useIdeaStore } from "@/store/useIdeaStore";
+
 const Upload = () => {
   const {
     register,
@@ -20,8 +23,22 @@ const Upload = () => {
     formState: { errors },
   } = useForm();
 
+  const { postIdea } = useIdeaStore();
+
   const onSubmit = async (data) => {
-    console.log(data);
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("category", data.category);
+    formData.append("coverImage", data.coverImage[0]);
+    formData.append("pitch", data.pitch);
+
+    try {
+      await postIdea(formData);
+      reset();
+    } catch (error) {
+      console.error("Error uploading idea:", error);
+    }
   };
 
   return (
@@ -40,9 +57,9 @@ const Upload = () => {
             Idea Name
           </label>
           <Input
-            placeholder="Enter Name Of Idea"
+            placeholder="Enter Title Of Idea"
             className="h-12 border border-zinc-600 text-white placeholder:text-zinc-600"
-            {...register("name", {
+            {...register("title", {
               required: "Name is required",
               minLength: { value: 3, message: "Minimum 3 characters required" },
               maxLength: {
@@ -120,7 +137,7 @@ const Upload = () => {
             type="file"
             accept="image/*"
             className="h-12 border border-zinc-600 text-white placeholder:text-zinc-600"
-            {...register("coverImg", { required: "Cover image is required" })}
+            {...register("coverImage", { required: "Cover image is required" })}
           />
           {errors.coverImg && (
             <p className="text-red-500 text-sm">{errors.coverImg.message}</p>
