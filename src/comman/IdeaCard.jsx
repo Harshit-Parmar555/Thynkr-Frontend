@@ -76,7 +76,7 @@ const IdeaCard = ({ idea, loggedInUser }) => {
           </span>
           <div className="flex gap-2">
             <Button
-              className="rounded-full px-4 py-1 text-sm font-[Lato] cursor-pointer"
+              className="bg-white hover:bg-white/80 text-black font-[Lato] cursor-pointer"
               onClick={handleDetailsClick}
             >
               Details
@@ -87,8 +87,7 @@ const IdeaCard = ({ idea, loggedInUser }) => {
                 onOpenChange={setdialogOpen}
                 trigger={
                   <Button
-                    variant="destructive"
-                    size="sm"
+                    className="bg-red-600 cursor-pointer hover:bg-red-600/80"
                     disabled={deletingIdea}
                   >
                     Delete
