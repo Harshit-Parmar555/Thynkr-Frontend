@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import IdeaCard from "@/comman/IdeaCard";
+import { useAuthStore } from "@/store/useAuthStore";
 import { useIdeaStore } from "@/store/useIdeaStore";
 import { IdeaCardSkeleton } from "@/comman/Skeletons";
 import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
+  const {user} = useAuthStore();
   const { fetchIdeas, ideas, fetchingIdeas } = useIdeaStore();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
@@ -57,7 +59,7 @@ const Home = () => {
             <IdeaCardSkeleton key={idx} />
           ))
         ) : ideas.length > 0 ? (
-          ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} />)
+          ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} loggedInUser={user._id} />)
         ) : (
           <div className="col-span-full text-center text-zinc-400">
             No ideas found.
