@@ -1,23 +1,41 @@
+// React and Routing
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+// Store
 import { useIdeaStore } from "@/store/useIdeaStore";
+
+// Utilities
 import { formatDate } from "@/utils/dateFormat";
+
+// UI Components
 import { IdeaSkeleton } from "@/comman/Skeletons";
 
+/**
+ * Idea Page
+ * - Displays detailed view of a single idea
+ * - Shows loading skeleton while fetching
+ * - Responsive and accessible
+ */
 const Idea = () => {
   const navigate = useNavigate();
   const { getIdea, viewIdea, fetchingIdea } = useIdeaStore();
   const { id } = useParams();
 
+  // Navigate to user profile on avatar/name click
   const handleUserClick = () => {
-    navigate(`/user/${viewIdea.user._id}`);
+    if (viewIdea?.user?._id) {
+      navigate(`/user/${viewIdea.user._id}`);
+    }
   };
 
+  // Fetch idea details on mount or id change
   useEffect(() => {
     getIdea(id);
     // eslint-disable-next-line
   }, [id]);
 
+  // Show skeleton while loading
   if (fetchingIdea || !viewIdea) {
     return <IdeaSkeleton />;
   }
@@ -25,7 +43,7 @@ const Idea = () => {
   return (
     <div className="w-full pt-32 flex flex-col items-center">
       {/* Banner */}
-      <div className="w-full sm:w-[90%] lg:w-[60%] aspect-[16/9] rounded-md overflow-hidden shadow-lg border-[1px] border-zinc-800">
+      <div className="w-[95%] lg:w-[60%] aspect-[16/9] rounded-md overflow-hidden shadow-lg border-[1px] border-zinc-800">
         <img
           src={viewIdea?.coverImage}
           alt="Idea Banner"
@@ -43,12 +61,13 @@ const Idea = () => {
             src={viewIdea?.user?.profilePicture}
             alt={`${viewIdea?.user?.username}'s avatar`}
             className="w-10 h-10 rounded-full"
+            referrerPolicy="no-referrer"
           />
           <div>
-            <div className="text-base font-semibold text-white font-[Poppins]">
+            <div className="text-base font-semibold text-white font-[Poppins] truncate max-w-[120px]">
               {viewIdea?.user?.username}
             </div>
-            <div className="text-sm text-zinc-400 font-[Inter]">
+            <div className="text-sm text-zinc-400 font-[Inter] truncate max-w-[140px]">
               {viewIdea?.user?.email || "No email"}
             </div>
           </div>
@@ -59,7 +78,7 @@ const Idea = () => {
       </div>
 
       {/* Description and Pitch */}
-      <div className="w-full sm:w-[90%] lg:w-[60%] mt-8 px-2 pb-6">
+      <div className="w-full sm:w-[90%] lg:w-[60%] mt-8 px-4 pb-6">
         <h2 className="text-xl font-bold text-white mb-2 font-[Poppins]">
           Description
         </h2>
