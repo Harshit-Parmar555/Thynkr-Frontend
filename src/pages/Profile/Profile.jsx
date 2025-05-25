@@ -65,7 +65,9 @@ const Profile = () => {
       {/* User's Ideas Section */}
       <div className="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 pb-8">
         {user.ideas.length > 0 ? (
-          user.ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} />)
+          user.ideas.map((idea) => (
+            <IdeaCard key={idea.id} idea={idea} loggedInUser={user._id} />
+          ))
         ) : (
           <div className="col-span-full text-center text-zinc-400">
             You haven't uploaded any ideas yet.
