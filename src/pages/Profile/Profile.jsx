@@ -33,7 +33,6 @@ const Profile = () => {
               alt={`${user.username}'s avatar`}
               className="w-28 h-28 rounded-full border-4 border-blue-600 shadow-lg object-cover"
             />
-            <span className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-zinc-950 rounded-full"></span>
           </div>
           <div>
             <div className="text-3xl font-extrabold text-white tracking-tight font-[Poppins]">
@@ -49,13 +48,13 @@ const Profile = () => {
         <div className="flex flex-col md:flex-row gap-4 z-10">
           <Button
             onClick={() => navigate("/post")}
-            className="bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white px-8 py-3 rounded-xl font-semibold shadow-md transition-all duration-200 font-[Lato]"
+            className="bg-blue-600 text-white px-8 py-3 rounded-md font-semibold shadow-md transition-all duration-200 font-[Lato]"
           >
             + Add New Idea
           </Button>
           <Button
             onClick={handleLogout}
-            className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white px-8 py-3 rounded-xl font-semibold shadow-md transition-all duration-200 font-[Lato]"
+            className="bg-red-600 text-white px-8 py-3 rounded-md font-semibold shadow-md transition-all duration-200 font-[Lato]"
           >
             Logout
           </Button>
