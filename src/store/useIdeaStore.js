@@ -8,6 +8,7 @@ export const useIdeaStore = create((set) => ({
   viewIdea: null,
   fetchingIdea: false,
   postingIdea: false,
+  deletingIdea: false,
 
   fetchIdeas: async (query) => {
     try {
@@ -49,6 +50,21 @@ export const useIdeaStore = create((set) => ({
       toast.error(error.response?.data?.message || "Failed to post idea");
     } finally {
       set({ postingIdea: false });
+    }
+  },
+
+  deleteIdea: async (id) => {
+    try {
+      set({ deletingIdea: true });
+      const response = await axiosInstance.delete(`/idea/delete-idea/${id}`);
+      set((state) => ({
+        ideas: state.ideas.filter((idea) => idea._id !== id),
+      }));
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to delete idea");
+    } finally {
+      set({ deletingIdea: false });
     }
   },
 }));
