@@ -66,7 +66,7 @@ const IdeaCard = ({ idea, loggedInUser }) => {
         <img
           src={idea?.coverImage}
           alt={`${idea?.title} Cover`}
-          className="w-full mb-4 rounded-md h-40 object-cover"
+          className="w-full mb-4 rounded-md h-40 object-cover border-zinc-900 border"
         />
 
         {/* Category badge and details/delete buttons */}
