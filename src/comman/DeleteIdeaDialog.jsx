@@ -28,7 +28,12 @@ const DeleteIdeaDialog = ({
         </DialogDescription>
       </DialogHeader>
       <DialogFooter className="flex justify-end gap-2">
-        <Button variant="outline" type="button" data-cancel>
+        <Button
+          onClick={() => onOpenChange(false)}
+          variant="outline"
+          type="button"
+          data-cancel
+        >
           Cancel
         </Button>
         <Button variant="destructive" onClick={deleteIdea} disabled={loading}>
