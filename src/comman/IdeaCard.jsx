@@ -2,9 +2,16 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "@/utils/dateFormat";
+import DeleteIdeaDialog from "@/comman/DeleteIdeaDialog"; // Make sure this path is correct
 
-const IdeaCard = ({ idea }) => {
+import { useIdeaStore } from "@/store/useIdeaStore";
+import { set } from "react-hook-form";
+
+const IdeaCard = ({ idea, loggedInUser }) => {
   const navigate = useNavigate();
+  const { deleteIdea, deletingIdea } = useIdeaStore();
+
+  const [dialogOpen, setdialogOpen] = React.useState(false);
 
   const handleDetailsClick = () => {
     navigate(`/idea/${idea._id}`);
@@ -16,6 +23,8 @@ const IdeaCard = ({ idea }) => {
       navigate(`/user/${idea?.user?._id}`);
     }
   };
+
+  const isOwner = idea?.user?._id === loggedInUser;
 
   return (
     <div className="relative max-w-sm rounded-2xl border border-zinc-800 p-4 shadow-md bg-zinc-950 overflow-hidden">
@@ -60,17 +69,39 @@ const IdeaCard = ({ idea }) => {
           className="w-full mb-4 rounded-md h-40 object-cover"
         />
 
-        {/* Category badge and details button */}
+        {/* Category badge and details/delete buttons */}
         <div className="flex justify-between items-center">
           <span className="bg-zinc-800 text-blue-400 px-3 py-1 rounded-full text-xs font-semibold font-[Inter]">
             {idea?.category}
           </span>
-          <Button
-            className="rounded-full px-4 py-1 text-sm font-[Lato] cursor-pointer"
-            onClick={handleDetailsClick}
-          >
-            Details
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              className="rounded-full px-4 py-1 text-sm font-[Lato] cursor-pointer"
+              onClick={handleDetailsClick}
+            >
+              Details
+            </Button>
+            {isOwner && (
+              <DeleteIdeaDialog
+                open={dialogOpen}
+                onOpenChange={setdialogOpen}
+                trigger={
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    disabled={deletingIdea}
+                  >
+                    Delete
+                  </Button>
+                }
+                deleteIdea={async () => {
+                  await deleteIdea(idea._id);
+                  setdialogOpen(false);
+                }}
+                loading={deletingIdea}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
