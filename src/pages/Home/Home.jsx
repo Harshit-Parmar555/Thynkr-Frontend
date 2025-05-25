@@ -5,6 +5,8 @@ import IdeaCard from "@/comman/IdeaCard";
 // idea store import
 import { useIdeaStore } from "@/store/useIdeaStore";
 
+import { IdeaCardSkeleton } from "@/comman/Skeletons";
+
 const Home = () => {
   const { fetchIdeas, ideas, fetchingIdeas } = useIdeaStore();
 
@@ -22,7 +24,12 @@ const Home = () => {
         />
       </div>
       <div className="max-w-7xl w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 pb-8">
-        {ideas.length > 0 ? (
+        {fetchingIdeas ? (
+          // Show 6 skeleton cards while loading
+          Array.from({ length: 6 }).map((_, idx) => (
+            <IdeaCardSkeleton key={idx} />
+          ))
+        ) : ideas.length > 0 ? (
           ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} />)
         ) : (
           <div className="col-span-full text-center text-zinc-400">
