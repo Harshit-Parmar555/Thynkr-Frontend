@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { axiosInstance } from "@/utils/axios";
 import toast from "react-hot-toast";
 
+import { useAuthStore } from "./useAuthStore";
+
 export const useIdeaStore = create((set) => ({
   ideas: [],
   fetchingIdeas: false,
@@ -60,6 +62,13 @@ export const useIdeaStore = create((set) => ({
       set((state) => ({
         ideas: state.ideas.filter((idea) => idea._id !== id),
       }));
+      useAuthStore.setState((state) => ({
+        user: {
+          ...state.user,
+          ideas: state.user.ideas.filter((idea) => idea._id !== id),
+        },
+      }));
+
       toast.success(response.data.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to delete idea");
